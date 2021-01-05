@@ -1,0 +1,40 @@
+{% block content %}
+
+<h5>Login</h5>
+<!-- same here you have to add csrf_token inside form   -->
+
+  
+  <form class="form-login" method="POST">{% csrf_token %}
+    
+    <input type="email" name="email" id="inputEmail class="form-control" placeholder="Email address" required autofocus>
+    <br /><br />
+    <input type="password" name="password" id="inputPassword class="form-control" placeholder="Password" required>
+    <br /><br />
+    {% for field in login_form %}
+      <p>
+        {% for error in field.errors %}
+          <p style="color: darkred">{{error}}</p>
+        {% endfor %}
+      </p>
+    {% endfor %} 
+    {% if login_form.non_field_errors %}
+      <div style="color: darkred">
+        <p>{{login_form.non_field_errors}}</p>
+      <div>
+    {% endif %} 
+      <input type="submit" value="Login" />
+    </div>
+
+      
+      <div id="container">
+      <br /><br /><br /><br /><br />
+      <p>Don't have an account? <a href="{% url 'register' %}" style="font-family:'Play',sans-serif;">&nbsp;Register</a></p
+     
+</form>
+
+<div class="d-flex flex-column">
+  <a class="m-auto" href="{% url 'password_reset' %}">Rest password</a>
+</div>
+  {% endblock content %}
+
+

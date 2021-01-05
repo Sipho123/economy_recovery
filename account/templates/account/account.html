@@ -1,0 +1,37 @@
+{% block content %}
+
+
+
+<h5>Account</h5>
+
+
+<form class="form-login" method="POST">{% csrf_token %}
+    
+  <input type="email" name="email" id="inputEmail class="form-control" placeholder="Email address" required autofocus value={{account_form.initial.email}}>
+  <br /><br />
+  <input type="text" name="username" id="inputUsername class="form-control" placeholder="Username" required value="{{account_form.initial.username}}">
+  <br /><br />
+  {% for field in account_form %}
+    <p>
+      {% for error in field.errors %}
+        <p style="color: darkred">{{error}}</p>
+      {% endfor %}
+    </p>
+  {% endfor %} 
+  {% if account_form.non_field_errors %}
+    <div style="color: darkred">
+      <p>{{account_form.non_field_errors}}</p>
+    <div>
+  {% endif %} 
+
+  {% if success_massage %} 
+      <p style="color: darkred; text-align: center;">{{success_massage}}</p>
+  {% endif %} 
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>
+</form>
+
+<div class="d-flex flex-column">
+  <a class="m-auto" href="{% url 'password_change' %}">Change password</a>
+</div>
+{% endblock content %}
